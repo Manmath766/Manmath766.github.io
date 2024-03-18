@@ -355,68 +355,147 @@
 
       </div>
     </section><!-- End Portfolio Section -->
- <!-- ======= Contact Section ======= -->
- <section id="contact" class="contact">
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
   <div class="container" data-aos="fade-up">
+
     <div class="section-title">
       <h2>Contact</h2>
+      <p></p>
     </div>
-    <div class="row">
-      <div class="col-lg-5" >
-        <div class="info" style="margin-left: 10px;">
-          <i class="bi bi-geo-alt"></i>
-          <h4>Location:</h4>
+
+    <div class="row align-items-center"> <!-- Use align-items-center to vertically center align the sections -->
+
+      <!-- Column for "Address" -->
+      <div class="col-lg-4">
+        <div class="info-box">
+          <i class="bx bx-map"></i>
+          <h3>Address</h3>
           <p>Bhubaneswar, Odisha, India</p>
         </div>
-        <div class="info" style="margin-left: 10px;">
-          <i class="bi bi-envelope"></i>
-          <h4>Email:</h4>
-          <p><a href="mailto:manmath.contact@gmail.com">manmath.contact@gmail.com</a></p>
-        </div>
-        <div class="info" style="margin-left: 10px;">
-          <i class="bi bi-phone"></i>
-          <h4>Call:</h4>
-          <p>+91 7008548402, +91 7855948771</p>
+      </div>
+
+      <!-- Column for "Email" -->
+      <div class="col-lg-4">
+        <div class="info-box mt-4">
+          <i class="bx bx-envelope"></i>
+          <h3>Email</h3>
+          <p>manmath.contact@gmail.com</p>
         </div>
       </div>
-      <div class="col-lg-7">
-        <form id="contactForm" class="php-email-form" style="padding-left: 30px;">
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Your First Name" required>
+
+      <!-- Column for "Call" -->
+      <div class="col-lg-4">
+        <div class="info-box mt-4">
+          <i class="bx bx-phone-call"></i>
+          <h3>Call</h3>
+          <p>+91 7008548402</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Form -->
+    <div class="row align-items-center"> <!-- Center the form horizontally -->
+      <div class="col-lg-12">
+        <div class="text-center"> <!-- Center the form horizontally -->
+          <form id="contactForm" action="https://formspree.io/f/xayrdeeq" method="POST" role="form" class="php-email-form">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              </div>
             </div>
-            <div class="col-md-6 form-group mt-3 mt-md-0">
-              <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Your Last Name" required>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
             </div>
-          </div>
-          <div class="form-group mt-3">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-          </div>
-          <div class="form-group mt-3">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-          </div>
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message" required></textarea>
-          </div>
-          <div class="text-center mt-3">
-            <button type="submit" class="send-message-btn" style="border-color: rgb(83, 83, 142);">Send</button>
-          </div>
-        </form>
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading"></div>
+              <div class="sent-message"></div>
+            </div>
+            <div class="text-center"><button type="submit" class="btn btn-primary">Send Message</button></div>
+          </form>
+        </div>
       </div>
     </div>
+
   </div>
-</section>
-<!-- End Contact Section -->
+</section><!-- End Contact Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
-  // Reset the form fields after submission
-  document.getElementById("contactForm").addEventListener("submit", function(event) {
-    // Prevent the default form submission
-    event.preventDefault();
-    // Clear all form fields
-    document.getElementById("contactForm").reset();
+  document.getElementById('contactForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form data
+    var formData = new FormData(this);
+
+    // Send form data using fetch
+    fetch(this.action, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        // If the response is ok, display success message
+        document.querySelector('.sent-message').innerHTML = 'Message sent successfully.Thank you';
+        // Clear form fields
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('subject').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        // If the response is not ok, display an error message
+        throw new Error('Failed to send message');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Display error message
+      document.querySelector('.sent-message').innerHTML = 'Message sent successfully.Thank you';
+    });
   });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -451,33 +530,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent the default form submission
-
-      // Get form data
-      var formData = new FormData(this);
-
-      // Send form data using AJAX
-      fetch("send_email.php", {
-          method: "POST",
-          body: formData
-        })
-        .then(response => {
-          if (response.ok) {
-            alert("Message sent successfully!"); // Show success message
-            document.getElementById("contactForm").reset(); // Reset form fields
-          } else {
-            throw new Error("Failed to send message");
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("Failed to send message. Please try again later.");
-        });
-    });
-  </script>
-
+  
 </body>
 
 </html>
